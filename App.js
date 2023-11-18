@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import * as Font from 'expo-font';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text style={{ textAlign: 'center' }}>
-        Each day is a battle and each day you do not give in is a battle won. Don't give up.
+        Each day conquered, is a battle won.{'\n'}You may stubmle but pick yourself up and keep going. Don't give up.
       </Text>
       <StatusBar style='auto' />
       <View
@@ -32,13 +32,16 @@ export default function App() {
           <Text style={{ color: 'white', fontSize: 20 }}>🙌</Text>
         </View>
       </View>
-      <View
+      <Pressable
+        onPress={() => alert('Noted in calendar.')}
         style={{
+          backgroundColor: 'white',
           borderColor: '#DC7272',
           borderWidth: 4,
           borderRadius: 100,
           padding: 2,
           ...styles.center,
+          elevation: 5,
         }}>
         <View
           style={{
@@ -50,7 +53,7 @@ export default function App() {
           }}>
           <Text style={{ color: 'white' }}>Tap if you've relapsed today</Text>
         </View>
-      </View>
+      </Pressable>
       <Text style={{ textAlign: 'center' }}>Focus on your wins, not the losses.{'\n'}Take it one day at a time.</Text>
       <StatusBar style='auto' />
     </View>
