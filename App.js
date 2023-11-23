@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import MainView from './MainView';
-import CalanderView from './CalanderView';
+import MainView from './Views/MainView';
+import ProgressView from './Views/ProgressView';
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <MainView /> */}
-      <CalanderView />
+      <ProgressView />
       <StatusBar style='auto' />
     </View>
   );
