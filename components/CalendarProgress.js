@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { View, Button } from 'react-native';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
 
 function CalendarProgress() {
   const [selected, setSelected] = useState('');
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Months are zero-based
+    const day = currentDate.getDate();
+
+    // Format the date as needed (e.g., YYYY-MM-DD)
+    const formattedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+
+    return formattedDate;
+  };
+
+  const markDayHandler = () => {
+    console.log(getCurrentDate());
+    setSelected(getCurrentDate());
+    // console.log('selected day', day);
+    // console.log(selected);
+  };
+
   return (
     <View style={{ width: '100%' }}>
+      <Button title='Press' onPress={markDayHandler} />
       <Calendar
         // Initially visible month. Default = now
         // initialDate={'2023-11-26'}
@@ -15,10 +35,11 @@ function CalendarProgress() {
         // Maximum date that can be selected, dates after maxDate will be greyed out. Default = undefined
         // maxDate={'2023-11-30'}
         // Handler which gets executed on day press. Default = undefined
-        onDayPress={day => {
-          setSelected(day.dateString);
-          console.log('selected day', day);
-        }}
+        // onDayPress={day => {
+        //   setSelected(day.dateString);
+        //   console.log('selected day', day);
+        //   // console.log(selected);
+        // }}
         // Handler which gets executed on day-long press. Default = undefined
         onDayLongPress={day => {
           console.log('selected day', day);
@@ -61,7 +82,7 @@ function CalendarProgress() {
         // Enable the option to swipe between months. Default = false
         enableSwipeMonths={false}
         markedDates={{
-          [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: '#DC7272' },
+          [selected]: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
         }}
       />
     </View>
