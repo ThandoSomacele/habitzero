@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button } from 'react-native';
-import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
 import RelapseButton from './RelapseButton';
 
 function CalendarProgress() {
   const [relapseDate, setRelapseDate] = useState('');
   const [noRelapseDate, setNoRelapseDate] = useState('');
-
-  const getCurrentDate = (addDay = 0) => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Months are zero-based
-    const day = currentDate.getDate() + addDay;
-
-    // Format the date as needed (e.g., YYYY-MM-DD)
-    const formattedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
-
-    return formattedDate;
-  };
-  //  Relapse button handler
-  const relapseHandler = () => {
-    setRelapseDate(getCurrentDate());
-  };
 
   // No Replase hanlder
   useEffect(() => {
@@ -36,12 +20,12 @@ function CalendarProgress() {
   const wonDays = {
     ['2023-11-01']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-02']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
-    ['2023-11-03']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-03']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
     ['2023-11-04']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-05']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-06']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-07']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
-    ['2023-11-08']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-08']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
     ['2023-11-09']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-10']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-11']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
@@ -58,7 +42,7 @@ function CalendarProgress() {
 
   return (
     <View style={{ width: '100%' }}>
-      <RelapseButton onRelapse={relapseHandler} />
+      <RelapseButton setRelapseDate={setRelapseDate} />
       <Calendar
         // Initially visible month. Default = now
         // initialDate={'2023-11-26'}

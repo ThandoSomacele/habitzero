@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import RelapseButton from '../components/RelapseButton';
 
 function MainView() {
   return (
@@ -30,28 +31,7 @@ function MainView() {
           <Text style={{ color: 'white', fontSize: 20 }}>🙌</Text>
         </View>
       </View>
-      <Pressable
-        onPress={() => alert('Noted in calendar.')}
-        style={{
-          backgroundColor: 'white',
-          borderColor: '#DC7272',
-          borderWidth: 4,
-          borderRadius: 100,
-          padding: 2,
-          ...styles.center,
-          elevation: 5,
-        }}>
-        <View
-          style={{
-            ...styles.center,
-            backgroundColor: '#DC7272',
-            borderRadius: 100,
-            padding: 15,
-            width: '100%',
-          }}>
-          <Text style={{ color: 'white' }}>Tap if you've relapsed today</Text>
-        </View>
-      </Pressable>
+      {/* <RelapseButton /> TODO */}
       <Text style={{ textAlign: 'center' }}>Focus on your wins, not the losses.{'\n'}Take it one day at a time.</Text>
     </React.Fragment>
   );
