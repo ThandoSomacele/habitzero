@@ -1,32 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Button } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import RelapseButton from './RelapseButton';
 
 function CalendarProgress() {
-  const [selected, setSelected] = useState('');
+  const [relapseDate, setRelapseDate] = useState('');
+  const [noRelapseDate, setNoRelapseDate] = useState('');
 
-  const getCurrentDate = () => {
+  const getCurrentDate = (addDay = 0) => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1; // Months are zero-based
-    const day = currentDate.getDate();
+    const day = currentDate.getDate() + addDay;
 
     // Format the date as needed (e.g., YYYY-MM-DD)
     const formattedDate = `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
 
     return formattedDate;
   };
+  //  Relapse button handler
+  const relapseHandler = () => {
+    setRelapseDate(getCurrentDate());
+  };
 
-  const markDayHandler = () => {
-    console.log(getCurrentDate());
-    setSelected(getCurrentDate());
-    // console.log('selected day', day);
-    // console.log(selected);
+  // No Replase hanlder
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setNoRelapseDate(getCurrentDate(-1));
+    }, 1000 * 60 * 60 * 24);
+
+    // Clear the timeout when the component is unmounted
+    return () => clearTimeout(timeoutId);
+  }, []); // Empty dependency array ensures that this effect runs only once, similar to componentDidMount
+
+  const wonDays = {
+    ['2023-11-01']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-02']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-03']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-04']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-05']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-06']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-07']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-08']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-09']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-10']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-11']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-12']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-13']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ['2023-11-14']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+  };
+
+  const datesToMArk = {
+    [relapseDate]: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
+    [noRelapseDate]: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
+    ...wonDays,
   };
 
   return (
     <View style={{ width: '100%' }}>
-      <Button title='Press' onPress={markDayHandler} />
+      <RelapseButton onRelapse={relapseHandler} />
       <Calendar
         // Initially visible month. Default = now
         // initialDate={'2023-11-26'}
@@ -81,9 +113,7 @@ function CalendarProgress() {
         }}
         // Enable the option to swipe between months. Default = false
         enableSwipeMonths={false}
-        markedDates={{
-          [selected]: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
-        }}
+        markedDates={datesToMArk}
       />
     </View>
   );
