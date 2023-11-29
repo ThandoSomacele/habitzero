@@ -23,7 +23,7 @@ function RelapseButton({ setRelapseDate }) {
     <Pressable
       onPress={() => {
         alert(
-          "Noted in the calendar. 😔 \nDon't be to hard on yourself, \ntommorow is another opportunity.🙂 \nTry and note the events before you relapsed and try to avoid this next time."
+          "Noted in the calendar. 😔 \nDon't be too hard on yourself, \ntommorow is another opportunity.🙂 \nTry and note the events before you relapsed and try to avoid this next time."
         );
         relapseHandler();
       }}

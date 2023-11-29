@@ -20,12 +20,10 @@ function CalendarProgress() {
   const wonDays = {
     ['2023-11-01']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-02']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
-    ['2023-11-03']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
     ['2023-11-04']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-05']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-06']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-07']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
-    ['2023-11-08']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
     ['2023-11-09']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-10']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-11']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
@@ -33,11 +31,16 @@ function CalendarProgress() {
     ['2023-11-13']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ['2023-11-14']: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
   };
+  const lostDays = {
+    ['2023-11-03']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
+    ['2023-11-08']: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
+  };
 
   const datesToMArk = {
     [relapseDate]: { selected: true, disableTouchEvent: true, selectedColor: '#DC7272' },
     [noRelapseDate]: { selected: true, disableTouchEvent: true, selectedColor: '#47A8BD' },
     ...wonDays,
+    ...lostDays,
   };
 
   return (
