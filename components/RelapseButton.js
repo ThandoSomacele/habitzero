@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, StyleSheet, Text } from 'react-native';
+import { Pressable, View, StyleSheet, Text, Alert } from 'react-native';
 
 function RelapseButton({ setRelapseDate }) {
   const getCurrentDate = (addDay = 0) => {
@@ -19,23 +19,46 @@ function RelapseButton({ setRelapseDate }) {
     setRelapseDate(getCurrentDate());
   };
 
+  const handlePress = () => {
+    Alert.alert(
+      'Confirm Relapse',
+      'Are you sure you want to mark today as a relapse day?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes, I Relapsed',
+          style: 'destructive',
+          onPress: () => {
+            relapseHandler();
+            Alert.alert(
+              'Noted',
+              "Noted in the calendar. 😔\n\nDon't be too hard on yourself, tomorrow is another opportunity. 🙂\n\nTry and note the events before you relapsed and try to avoid this next time."
+            );
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <Pressable
-      onPress={() => {
-        alert(
-          "Noted in the calendar. 😔 \nDon't be too hard on yourself, \ntommorow is another opportunity.🙂 \nTry and note the events before you relapsed and try to avoid this next time."
-        );
-        relapseHandler();
-      }}
-      style={{
-        backgroundColor: 'white',
-        borderColor: '#DC7272',
-        borderWidth: 4,
-        borderRadius: 100,
-        padding: 2,
-        ...styles.center,
-        elevation: 5,
-      }}>
+      onPress={handlePress}
+      style={({ pressed }) => [
+        {
+          backgroundColor: 'white',
+          borderColor: '#DC7272',
+          borderWidth: 4,
+          borderRadius: 100,
+          padding: 2,
+          elevation: 5,
+          opacity: pressed ? 0.6 : 1,
+          transform: pressed ? [{ scale: 0.98 }] : [{ scale: 1 }],
+        },
+        styles.center,
+      ]}>
       <View
         style={{
           ...styles.center,
